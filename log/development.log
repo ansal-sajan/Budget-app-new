@@ -711,3 +711,62 @@ Processing by GroupsController#index as HTML
 Completed 200 OK in 116ms (Views: 43.2ms | ActiveRecord: 35.4ms | Allocations: 32417)
 
 
+Started GET "/groups/new" for 27.63.220.92 at 2024-05-18 15:17:40 +0000
+Cannot render console from 27.63.220.92! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by GroupsController#new as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `logged_in?'
+  Rendering layout layouts/application.html.erb
+  Rendering groups/new.html.erb within layouts/application
+  Rendered groups/new.html.erb within layouts/application (Duration: 27.8ms | Allocations: 5972)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_messages.html.erb (Duration: 0.1ms | Allocations: 57)
+  Rendered layout layouts/application.html.erb (Duration: 45.5ms | Allocations: 12586)
+Completed 200 OK in 63ms (Views: 46.3ms | ActiveRecord: 4.8ms | Allocations: 19243)
+
+
+Started POST "/groups" for 27.63.220.92 at 2024-05-18 15:18:02 +0000
+Cannot render console from 27.63.220.92! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by GroupsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "group"=>{"name"=>"food", "icon"=>"ticket"}}
+  [1m[36mUser Load (8.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `logged_in?'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/groups_controller.rb:18:in `create'
+  [1m[36mGroup Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM "groups" WHERE "groups"."name" = $1 LIMIT $2[0m  [["name", "food"], ["LIMIT", 1]]
+  ↳ app/controllers/groups_controller.rb:18:in `create'
+  [1m[36mGroup Create (6.8ms)[0m  [1m[32mINSERT INTO "groups" ("name", "icon", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "food"], ["icon", "ticket"], ["created_at", "2024-05-18 15:18:02.565422"], ["updated_at", "2024-05-18 15:18:02.565422"], ["user_id", 1]]
+  ↳ app/controllers/groups_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/groups_controller.rb:18:in `create'
+Redirected to http://52.54.245.74:3000/groups
+Completed 302 Found in 32ms (ActiveRecord: 20.3ms | Allocations: 7610)
+
+
+Started GET "/groups" for 27.63.220.92 at 2024-05-18 15:18:02 +0000
+Cannot render console from 27.63.220.92! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by GroupsController#index as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `logged_in?'
+  [1m[35m (6.0ms)[0m  [1m[34mSELECT SUM("entities"."amount") FROM "entities" WHERE "entities"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/groups_controller.rb:8:in `index'
+  Rendering layout layouts/application.html.erb
+  Rendering groups/index.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (2.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 1], ["record_type", "User"], ["name", "avatar"], ["LIMIT", 1]]
+  ↳ app/helpers/application_helper.rb:3:in `avatar_url'
+  Rendered groups/_modal.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered groups/_logout.html.erb (Duration: 0.2ms | Allocations: 83)
+  [1m[36mGroup Load (1.8ms)[0m  [1m[34mSELECT "groups".* FROM "groups" WHERE "groups"."user_id" = $1 ORDER BY "groups"."created_at" DESC[0m  [["user_id", 1]]
+  ↳ app/views/groups/_groups.html.erb:10
+  Rendered groups/_groups.html.erb (Duration: 3.4ms | Allocations: 1358)
+  [1m[36mEntity Load (3.9ms)[0m  [1m[34mSELECT "entities".* FROM "entities" WHERE "entities"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/views/groups/index.html.erb:26
+  [1m[36mEntity Load (1.8ms)[0m  [1m[34mSELECT "entities".* FROM "entities" WHERE "entities"."group_id" = $1[0m  [["group_id", 1]]
+  ↳ app/views/groups/index.html.erb:63
+  Rendered groups/index.html.erb within layouts/application (Duration: 28.7ms | Allocations: 6683)
+[Webpacker] Everything's up-to-date. Nothing to do
+  Rendered layouts/_messages.html.erb (Duration: 0.2ms | Allocations: 63)
+  Rendered layout layouts/application.html.erb (Duration: 46.8ms | Allocations: 13057)
+Completed 200 OK in 61ms (Views: 37.9ms | ActiveRecord: 17.3ms | Allocations: 16594)
+
+
